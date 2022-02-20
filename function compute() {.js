@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Simple Interest Calculator</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        
-        <div class="maindiv">
-        <h1>Simple Interest Calculator</h1>
+function compute() {
+    //Get the values and calculate 
+    var principal = parseFloat(document.getElementById("principal").value);
+    var rate = parseFloat(document.getElementById("rate").value);
+    var years = parseInt(document.getElementById("years").value);
+    var interest = principal * years * rate / 100;
+    var yearInTheFuture = new Date().getFullYear() + years;
+    //Create the Interest text
+    document.getElementById("result").innerHTML = "Interest : If you deposit <mark>" + principal + "</mark>,<br/>" +
+        "at an interest rate of <mark>" + rate + "</mark>,<br/>" +
+        "You will receive an amount of <mark>" + interest + "</mark>,<br/> " +
+        "in the year <mark>" + yearInTheFuture + "</mark>";
 
-        Amount <input type="number"  id="principal" onchange="validateAmount()">  <br/>
-        Rate <input type="range" id="rate" min="1" max="20" step="0.25" value="10.25" onchange="getSliderValue()"><span id="rateSpan">10.50%</span>  <br/>
-        No. of Years  
-        <select name="years" id="years">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select><br/>
+}
 
-        <button onclick="compute()">Compute Interest</button><br/>
-        <span id="result"></span><br>
-        <span id="result"></span>
-        <footer>&#169; This calculator belongs to Deshaun A. Thompson SR. </footer>
-    </div>
-    </body>
-</html>
+//update ther ate value
+function getSliderValue() {
+    document.getElementById("rateSpan").innerHTML = document.getElementById("rate").value;
+}
+
+//Check for positive values
+function validateAmount() {
+    var principal = document.getElementById("principal").value;
+    var biggerThanZero = parseInt(principal) > 0;
+    if (!biggerThanZero) {
+        alert("Enter a positive number");
+        document.getElementById("principal").focus();
+    }
+
+}
